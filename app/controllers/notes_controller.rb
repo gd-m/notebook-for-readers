@@ -8,7 +8,9 @@ class NotesController < ApplicationController
 	end
 
 	def create
-		
+		@note = Note.create(notes_params)
+
+		redirect_to note_params
 	end
 
 	def show
