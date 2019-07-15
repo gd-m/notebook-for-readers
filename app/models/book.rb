@@ -1,4 +1,4 @@
 class Book < ApplicationRecord
 	has_many :notes
-	validates :book, presence: true
+	validates :name, presence: true
 end
