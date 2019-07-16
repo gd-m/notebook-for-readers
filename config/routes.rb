@@ -6,4 +6,8 @@ Rails.application.routes.draw do
   root "sessions#welcome"
   get '/home', to: "sessions#home" , as: 'home'
   devise_for :users
+
+  resources :books do
+  	resources :notes, only: [:new, :create , :index]
+  end
 end
