@@ -4,13 +4,22 @@ class NotesController < ApplicationController
 	end
 
 	def new
-		@note = Note.new
+		if params[:book_id] && book = Book.find_by_id(params[:book_id])
+			@note = book.notes.build			
+		else
+			@note = Note.new
+			@note.build_book
+		end
 	end
 
 	def create
-		@note = Note.create(notes_params)
-
-		redirect_to note_path(@note)
+		@note = current_user.notes.build(note_params)
+		if @note.save
+			redirect_to note_path(@note)
+		else
+			@note.build_book unless @note.book
+			render :new
+		end
 	end
 
 	def show
