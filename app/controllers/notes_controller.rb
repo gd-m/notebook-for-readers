@@ -1,6 +1,10 @@
 class NotesController < ApplicationController
 	def index
-		@notes = current_user.notes.all
+		if params[:book_id] && book = Book.find_by_id(params[:book_id])
+			@notes = book.notes.public_notes
+		else
+			@notes = current_user.notes
+		end
 	end
 
 	def new
@@ -23,15 +27,15 @@ class NotesController < ApplicationController
 	end
 
 	def show
-		@note = Note.find(params[:id])
+		set_note
 	end
 
 	def edit
-		@note = Note.find(params[:id])
+		set_note
 	end
 
 	def update
-		@note = Note.find(params[:id])
+		set_note
 
 		@note.update(notes_params)
 
@@ -39,13 +43,20 @@ class NotesController < ApplicationController
 	end
 
 	def destroy
-		@note = Note.find(params[:id])
+	set_note
 		@note.destroy
 
 		redirect_to notes_path
 	end
 
 	private
+
+	def set_note
+		@note = Note.find_by_id(params[:id])
+		if !@note
+			redirect_to notes_path
+		end
+	end
 
 	def notes_params
 		params.require(:note).permit(:content, :public, :book_id, book_attributes: [:name])
