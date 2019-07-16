@@ -6,4 +6,6 @@ class Note < ApplicationRecord
 	#validates :public, presence: true
 
 	accepts_nested_attributes_for :book
+
+	scope :public_notes, -> {where(public: true)}
 end
