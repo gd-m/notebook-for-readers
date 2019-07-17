@@ -28,6 +28,7 @@ class NotesController < ApplicationController
 
 	def show
 		set_note
+		@book = Book.find_by_id(@note.book_id)
 	end
 
 	def edit

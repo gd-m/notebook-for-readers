@@ -1,6 +1,6 @@
 class BooksController < ApplicationController
 	def new
-		@book = Book.new	
+		@book = Book.new
 	end
 
 	def show
@@ -9,6 +9,8 @@ class BooksController < ApplicationController
 
 	def create
 		@book = Book.create(book_params)
+	
+		
 
 		redirect_to book_path(@book)
 
