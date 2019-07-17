@@ -11,13 +11,7 @@
 	<%= f.collection_select :book_id, Book.all, :id , :name , promp: true %>
 
 	<br><br>
-	<% if !params[:book_id] %>
-	<h3>Or Create a new Book</h3>
-	<%= f.fields_for :book do |b| %>
-	<%= b.label :name %>
-	<%= b.text_field :name %>
-	<% end %>
-	<% end %>
+
 
 	<%= f.submit %>
 

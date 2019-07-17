@@ -1,4 +1,9 @@
+<h1>Notes by <%= current_user.email %></h1>
+<ol>
 <% @notes.each do |note| %>
-<%= link_to note.content, note_path(note)%><br>
-<% end %>
+<div>
+<li> <%= link_to note.content, note_path(note)%> <br><span> Book Name - <%= link_to note.book.name, book_path(note.book)  %></span></li><br>
 
+</div>
+<% end %>
+</ol>
