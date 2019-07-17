@@ -10,6 +10,8 @@
   </head>
 
   <body>
+    <%= render :partial => "sessions/nav" %>
+    <%= render :partial => "sessions/nav2" if user_signed_in? %>
     <%= yield %>
   </body>
 </html>
