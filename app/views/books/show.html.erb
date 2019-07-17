@@ -1,5 +1,10 @@
-<h1>Book</h1>
 <h1><%= @book.name %></h1>
-<% @book.notes %>
 
-<a href="/book/<%= @book.id %>/notes/new"> Add Note to this Book </a>
+<a href="/books/<%= @book.id %>/notes/new">Add Note to this Book</a>
+<h4>Notes</h4>
+
+<ol>
+<% @book.notes.each do |note| %>
+<li> <%= link_to(note.content, note_path(note)) %></li> <br>
+<% end %>
+</ol>
